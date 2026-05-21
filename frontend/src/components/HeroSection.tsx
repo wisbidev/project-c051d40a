@@ -1,23 +1,18 @@
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-24 bg-[#0a0a0f] overflow-hidden">
-      {/* Blue gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0d1b2a] to-[#0a0a0f] pointer-events-none" />
-      {/* Subtle radial glow behind headline */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#3B82F6] opacity-10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center space-y-8">
-        {/* Headline */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-[0_0_30px_rgba(59,130,246,0.4)]">
           AI Team. Không cần thuê dev.
         </h1>
 
-        {/* Subheadline */}
         <p className="text-base sm:text-lg text-gray-400 max-w-xl mx-auto leading-relaxed">
           Giao tiếp với AI team qua Telegram — lên ý tưởng, nhận source code và deploy tự động. Không cần viết code, không cần quản lý dev.
         </p>
 
-        {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
             href="#start"
