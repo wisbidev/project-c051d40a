@@ -1,24 +1,19 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: 'aiteam - AI Team. Không cần thuê dev.',
-  description: 'Nền tảng AI tự động xây dựng phần mềm qua Telegram. Thuê PM, TL, Dev, TestLead AI thay vì đội ngũ dev truyền thống.',
-  openGraph: {
-    title: 'aiteam - AI Team. Không cần thuê dev.',
-    description: 'Nền tảng AI tự động xây dựng phần mềm qua Telegram.',
-    type: 'website',
-  },
-}
+  title: "aiteam — AI Team. Không cần thuê dev.",
+  description: "AI platform tự động build phần mềm qua Telegram. Giao tiếp với AI team, nhận source code và deploy tự động.",
+};
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode
-}) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="vi">
-      <body className="bg-[#0a0a0f] text-white antialiased">{children}</body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
-  )
+  );
 }
