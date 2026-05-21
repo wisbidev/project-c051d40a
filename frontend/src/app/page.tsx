@@ -1,13 +1,13 @@
 import HeroSection from "@/components/HeroSection";
 import PipelineSection from "@/components/PipelineSection";
-import AIAgentsSection from "@/components/AIAgentsSection";
+import AgentsSection from "@/components/AgentsSection";
 
 export default function Home() {
   return (
     <main>
       <HeroSection />
       <PipelineSection />
-      <AIAgentsSection />
+      <AgentsSection />
     </main>
   );
 }
