@@ -3,6 +3,7 @@ import PipelineSection from "@/components/PipelineSection";
 import AgentsSection from "@/components/AgentsSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import TechStackSection from "@/components/TechStackSection";
+import FinalCTASection from "@/components/FinalCTASection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <AgentsSection />
       <FeaturesSection />
       <TechStackSection />
+      <FinalCTASection />
     </main>
   );
 }
