@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const steps = [
   {
@@ -50,27 +50,34 @@ const steps = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
+function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "-100px" }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} ${className}`}>
+      {children}
+    </div>
+  );
+}
 
 export default function PipelineSection() {
   return (
@@ -78,37 +85,21 @@ export default function PipelineSection() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f] via-[#0d1b2a]/30 to-[#0a0a0f] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <AnimatedSection className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Từ ý tưởng đến deploy hoàn toàn tự động
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Chỉ cần mô tả ý tưởng của bạn, AI team sẽ lo nốt phần còn lại
           </p>
-        </motion.div>
+        </AnimatedSection>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="relative"
-        >
+        <div className="relative">
           <div className="hidden lg:block absolute top-[72px] left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#3B82F6]/40 to-transparent" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4">
             {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="relative"
-              >
+              <AnimatedSection key={index} className="relative" style={{ transitionDelay: `${index * 100}ms` }}>
                 <div className="relative bg-[#0f0f1a] border border-[#1f1f3a] rounded-xl p-6 hover:border-[#3B82F6]/50 transition-colors duration-300">
                   <div className="hidden lg:block absolute -right-[26px] top-1/2 -translate-y-1/2 z-10">
                     <svg className="w-6 h-6 text-[#3B82F6]/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -133,10 +124,10 @@ export default function PipelineSection() {
                 </div>
 
                 <div className="hidden lg:block absolute -bottom-4 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#3B82F6]/60" />
-              </motion.div>
+              </AnimatedSection>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
