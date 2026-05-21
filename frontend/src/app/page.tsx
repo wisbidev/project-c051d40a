@@ -4,6 +4,7 @@ import AgentsSection from "@/components/AgentsSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import TechStackSection from "@/components/TechStackSection";
 import FinalCTASection from "@/components/FinalCTASection";
+import FooterSection from "@/components/FooterSection";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <FeaturesSection />
       <TechStackSection />
       <FinalCTASection />
+      <FooterSection />
     </main>
   );
 }
